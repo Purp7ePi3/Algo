@@ -72,7 +72,6 @@ nCoda dequeue(uCoda *u) {
     return minNode;
 }
 
-
 moves **initPredecessors(int rows, int cols) {
     int i;
     moves **predecessors = (moves **)malloc(rows * sizeof(moves *));
