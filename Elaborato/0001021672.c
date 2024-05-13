@@ -81,7 +81,6 @@ moves **initPredecessors(int rows, int cols) {
     return predecessors;
 }
 
-
 void findMinPath(int rows, int cols, int **matrix, int ccell, int cheight) {
     /*Contatori*/
     int i, j, pathLength, newRow, newCol;
