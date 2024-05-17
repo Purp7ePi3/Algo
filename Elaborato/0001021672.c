@@ -72,7 +72,6 @@ nCoda dequeue(uCoda *u) {
     return minNode;
 }
 
-
 moves **initPredecessors(int rows, int cols) {
     int i;
     moves **predecessors = (moves **)malloc(rows * sizeof(moves *));
@@ -81,7 +80,6 @@ moves **initPredecessors(int rows, int cols) {
     }
     return predecessors;
 }
-
 
 void findMinPath(int rows, int cols, int **matrix, int ccell, int cheight) {
     /*Contatori*/
