@@ -1,8 +1,10 @@
-/*TODO LEGGI I LE COSE CHE MANCANO DAL FILE DEL PROGETTO, CAMBIA QUALCHE VARIABILE IN QUA E Là METTI ALTRI CONTROLLI E POI CI SIAMO*/
+/*TODO LEGGI I LE COSE CHE MANCANO DAL FILE DEL PROGETTO, CAMBIA QUALCHE VARIABILE IN QUA E Là E POI CI SIAMO*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
 #include <math.h>
+
+#define ALOT LONG_MAX
 
 typedef struct {
     int x, y;
@@ -52,7 +54,9 @@ void heapifyDown(uCoda *u, int n) {
 
 uCoda* createuCoda(int size) {
     uCoda* u = (uCoda*)malloc(sizeof(uCoda));
+    if(u == NULL ) exit(EXIT_FAILURE);
     u->coda = (nCoda*)malloc(size * sizeof(nCoda));
+    if(u->coda == NULL ) exit(EXIT_FAILURE);
     u->size = 0;
     return u;
 }
@@ -72,15 +76,6 @@ nCoda dequeue(uCoda *u) {
     return minNode;
 }
 
-moves **initPredecessors(int rows, int cols) {
-    int i;
-    moves **predecessors = (moves **)malloc(rows * sizeof(moves *));
-    for (i = 0; i < rows; i++) {
-        predecessors[i] = (moves *)malloc(cols * sizeof(moves));
-    }
-    return predecessors;
-}
-
 void findMinPath(int rows, int cols, int **matrix, int ccell, int cheight) {
     /*Contatori*/
     int i, j, pathLength, newRow, newCol;
@@ -92,13 +87,20 @@ void findMinPath(int rows, int cols, int **matrix, int ccell, int cheight) {
     long int finalCost = 0, currentCost = 0, edgeCost = 0;
     int aRows, aCols;
     long int **distances = (long int **)malloc(rows * sizeof(long int *));
+    if(distances == NULL) exit(EXIT_FAILURE);
     for (i = 0; i < rows; i++) {
         distances[i] = (long int *)malloc(cols * sizeof(long int));
+        if(distances[i] == NULL) exit(EXIT_FAILURE);
         for (j = 0; j < cols; j++) {
-            distances[i][j] = LONG_MAX;
+            distances[i][j] = ALOT;
         }
     }
-    predecessors = initPredecessors(rows, cols);
+    predecessors = (moves **)malloc(rows * sizeof(moves *));
+    if(predecessors == NULL) exit(EXIT_FAILURE);
+    for (i = 0; i < rows; i++) {
+        predecessors[i] = (moves *)malloc(cols * sizeof(moves));
+        if(predecessors[i] == NULL) exit(EXIT_FAILURE);
+    }
     q = createuCoda(rows * cols);
     startpoint.x = 0;
     startpoint.y = 0;
@@ -130,8 +132,8 @@ void findMinPath(int rows, int cols, int **matrix, int ccell, int cheight) {
 
     finalCost = distances[rows - 1][cols - 1];
 
-    printf("Percorso minimo:\n");
     path = (moves *)malloc(rows * cols * sizeof(moves));
+    if(path == NULL) exit(EXIT_FAILURE);
     printPath.x = rows -1;
     printPath.y = cols -1;
     pathLength = 0;
@@ -145,7 +147,7 @@ void findMinPath(int rows, int cols, int **matrix, int ccell, int cheight) {
     for (i = pathLength - 1; i >= 0; --i) {
         printf("%d %d\n", path[i].x, path[i].y);
     }
-    printf("\b-1 -1\n%ld\nPathlen: %d", finalCost + ccell,pathLength);
+    printf("\b-1 -1\n%ld\n", finalCost + ccell);
     for (i = 0; i < rows; ++i) {
         free(distances[i]);
         free(predecessors[i]);
@@ -166,22 +168,19 @@ int main(int argc, char *argv[]) {
     /*variabili che devo prendere in input*/
     int rows, cols, ccell, cheight;
     FILE*file;
-    if (argc != 2) {
-        printf("Manca il nome del file");
-        exit(EXIT_FAILURE);
-    }
+
+    if (argc != 2) return EXIT_FAILURE;
 
     file = fopen(argv[1], "r");
-    if (file == NULL) {
-        printf("Impossibile aprire il file, verificare se presente");
-        return 1;
-    }
+    if (file == NULL) return EXIT_FAILURE;
 
     fscanf(file, "%d\n%d\n%d\n%d", &ccell, &cheight, &rows, &cols); 
 
-    matrix= (int **)malloc(rows * sizeof(int *));
+    matrix = (int **)malloc(rows * sizeof(int *));
+    if(matrix == NULL) return EXIT_FAILURE;
     for (i = 0; i < rows; i++) {
         matrix[i] = (int*)malloc(cols * sizeof(int));
+        if(matrix[i] == NULL) return EXIT_FAILURE;
         for (j = 0; j < cols; j++) {
             fscanf(file, "%d", &matrix[i][j]); 
         }
@@ -190,10 +189,11 @@ int main(int argc, char *argv[]) {
     fclose(file);
 
     findMinPath(rows, cols, matrix, ccell, cheight);
-
+    
     for (i = 0; i < rows; i++) {
         free(matrix[i]);
     }
+
     free(matrix);
 
     return 0;
