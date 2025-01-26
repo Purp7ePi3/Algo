@@ -1,0 +1,30 @@
+- Caso ottimo, pessimo, medio di ricerca sequenziale (fondamenti, 28)
+- Complessita' ricerca binaria, medodo iterativo (An asintotica 26)
+- Somma dei primi n numeri naturali e' n(n+1)/2 (An asitotica 24)
+- Complessita' ricerca binaria, medodo sostituzione (An asintotica 26)
+- Albero ricorsione n log n (An asintotica 28)
+- Limite inferiore comparison sort (ordinamenti 19 / 20)
+- Complessita' pessima / ottima insertion sort (ordinamenti 36)
+- Complessita' pessima / media / ottima merge sort (dividi impera 9)
+- Complessita' pessima / ottima quick sort (dividi impera 19 / 20)
+- Altezza albero binario quasi completo (heap 2)
+- Complessita' heapify
+- Complessita' build-heap
+- Complessità simple uniform hashing (hash, 19 / 20 / 21)
+- Open addressing, lunghezza media delle probe come somma di probabilità (hash, 44)
+- BFS, complessità (graph, 13)
+- DFS, complessità (graph, 20)
+- (topoOrder) Un grafo diretto G è aciclico sse una ricerca DFS su G non produce archi all’indietro
+- (topoOrder) Tesi: dato un DAG, un arco (u,v) \in E implica che f[v] < f[u]
+- (up tree) Per tutte le radici x di alberi, size[x] ≥ 2 ^ rank[x]
+- (up tree) Per ogni intero r≥0 ci sono al più n/2^r nodi di rango r.
+- (greedy) correttezza greedy activity selector
+- (dinamica) sottostruttura ottima LCS
+- Kruskal, correttezza (MST, 23)
+- Kruskal, complessità (MST, 24)
+- Prim, complessità (MST, 38)
+- Cammini minimi, sottostruttura ottima (SPSS, 6)
+- Dijkstra, correttezza (SPSS, 18 / 19)
+- Dijkstra, complessità (SPSS, 20)
+- Riduzione 3-sat -> clique (complessità, 20)
+- Riduzione clique, VC (complessità, 29 / 30)
