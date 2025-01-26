@@ -147,7 +147,7 @@ void findMinPath(int rows, int cols, int **matrix, int ccell, int cheight) {
     for (i = pathLength - 1; i >= 0; --i) {
         printf("%d %d\n", path[i].x, path[i].y);
     }
-    printf("\b-1 -1\n%ld\n", finalCost + ccell);
+    printf("-1 -1\n%ld\n", finalCost + ccell);
     for (i = 0; i < rows; ++i) {
         free(distances[i]);
         free(predecessors[i]);

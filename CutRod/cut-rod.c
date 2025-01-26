@@ -134,7 +134,7 @@ double solve( void ){
         for(j = 1; j <= i; j++){
             if(g < p[j] + r[i - j]){
                 g = p[j] + r[i - j];
-                s[i] = j;
+                s[i] = j;   
             }
         }
         r[i] = g;
